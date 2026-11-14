@@ -1,0 +1,71 @@
+{
+    "model": "RandomForest (200 trees)",
+    "dataset_size": 11430,
+    "metrics": {
+        "accuracy": 0.884514435695538,
+        "precision": 0.8774341351660939,
+        "recall": 0.8938156359393232,
+        "f1_score": 0.8855491329479769,
+        "confusion_matrix": [
+            [
+                1501,
+                214
+            ],
+            [
+                182,
+                1532
+            ]
+        ]
+    },
+    "url_reports": [
+        {
+            "url": "https://www.wikipedia.org/wiki/Digital_forensics",
+            "prediction": "legitimate",
+            "phishing_probability": 0.045,
+            "risk_level": "LOW",
+            "indicators": []
+        },
+        {
+            "url": "http://192.168.10.25/secure/login/verify-account.php",
+            "prediction": "phishing",
+            "phishing_probability": 0.965,
+            "risk_level": "HIGH",
+            "indicators": [
+                "IP address used instead of domain name",
+                "Connection is not HTTPS",
+                "Multiple sensitive keywords (login, verify, secure...)"
+            ]
+        },
+        {
+            "url": "http://paypal.com.account-verify.secure-login.example-update.xyz/signin?user=abc@mail.com",
+            "prediction": "phishing",
+            "phishing_probability": 0.935,
+            "risk_level": "HIGH",
+            "indicators": [
+                "'@' symbol present in URL",
+                "Connection is not HTTPS",
+                "Excessive number of subdomains",
+                "Multiple sensitive keywords (login, verify, secure...)",
+                "Suspicious top-level domain",
+                "Unusually long URL"
+            ]
+        },
+        {
+            "url": "https://docs.python.org/3/library/urllib.html",
+            "prediction": "phishing",
+            "phishing_probability": 0.56,
+            "risk_level": "MEDIUM",
+            "indicators": []
+        },
+        {
+            "url": "http://bit.ly/3xYz12A",
+            "prediction": "phishing",
+            "phishing_probability": 1.0,
+            "risk_level": "HIGH",
+            "indicators": [
+                "Connection is not HTTPS",
+                "URL shortening service used"
+            ]
+        }
+    ]
+}
