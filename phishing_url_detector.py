@@ -20,7 +20,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import (accuracy_score, precision_score, recall_score,
                              f1_score, confusion_matrix)
 
-DATASET = sys.argv[1] if len(sys.argv) > 1 else "phish.csv"  # columns: url, status
 REPORT_FILE = "report.json"
 CHART_FILE = "confusion_features.png"
 
@@ -115,8 +114,8 @@ def load_data(path):
     return X, y
 
 
-def train_and_evaluate():
-    X, y = load_data(DATASET)
+def train_and_evaluate(dataset_path="phish.csv"):
+    X, y = load_data(dataset_path)
     X_tr, X_te, y_tr, y_te = train_test_split(
         X, y, test_size=0.30, random_state=42, stratify=y)
     model = RandomForestClassifier(n_estimators=200, random_state=42, n_jobs=-1)
@@ -166,8 +165,10 @@ def save_charts(model, columns, cm):
     plt.close()
 
 
-if __name__ == "__main__":
-    model, columns, metrics, (n_train, n_test) = train_and_evaluate()
+def main(argv=None):
+    args = sys.argv[1:] if argv is None else argv
+    dataset_path = args[0] if args else "phish.csv"
+    model, columns, metrics, (n_train, n_test) = train_and_evaluate(dataset_path)
     print(f"Training samples: {n_train} | Testing samples: {n_test} | Features: {len(columns)}")
     print(f"Accuracy : {metrics['accuracy']:.4f}")
     print(f"Precision: {metrics['precision']:.4f}")
@@ -194,3 +195,7 @@ if __name__ == "__main__":
         json.dump(report, fh, indent=4)
     save_charts(model, columns, metrics["confusion_matrix"])
     print(f"\nPhishing URL analysis complete. Report saved to {REPORT_FILE}, chart to {CHART_FILE}")
+
+
+if __name__ == "__main__":
+    main()
